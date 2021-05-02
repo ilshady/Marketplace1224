@@ -1,0 +1,20 @@
+PODS:
+  - Alamofire (5.4.1)
+  - MKProgress (1.1.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - MKProgress
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - MKProgress
+
+SPEC CHECKSUMS:
+  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  MKProgress: 260d166200323f3d991190a73ab2dc3a04b0f52f
+
+PODFILE CHECKSUM: 6ec5817e3c361f471d526d164dfdb90dc33cd4e7
+
+COCOAPODS: 1.10.0
