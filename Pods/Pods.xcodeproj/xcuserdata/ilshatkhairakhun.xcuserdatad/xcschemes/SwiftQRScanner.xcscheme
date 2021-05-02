@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "19B5ADBD128C6BA0B378AE01ABE62A71"
-               BuildableName = "MKProgress.framework"
-               BlueprintName = "MKProgress"
+               BlueprintIdentifier = "09AD09335955FA1C740D6F0CDDE8C8DA"
+               BuildableName = "SwiftQRScanner.framework"
+               BlueprintName = "SwiftQRScanner"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

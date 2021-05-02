@@ -9,7 +9,7 @@ import UIKit
 
 enum TabbarControllerType: CaseIterable {
     case main
-    case orders
+    case qrcode
     case profile
     case basket
 }
@@ -37,16 +37,10 @@ class TabBarController: UITabBarController {
                 let controller = WebViewController(with: "https://1224.kz")
                 controller.tabBarItem = UITabBarItem(title: "Главная", image: #imageLiteral(resourceName: "4. Home"), selectedImage: #imageLiteral(resourceName: "4. Home"))
                 controllers.append(controller)
-            case .orders:
-                if let token = UserDefaults.standard.string(forKey: "Token"), !token.isEmpty {
-                    let controller = WebViewController(with: "https://1224.kz/my-account/orders", token: token)
-                    controller.tabBarItem = UITabBarItem(title: "Мои заказы", image: #imageLiteral(resourceName: "26. Receipt"), selectedImage: #imageLiteral(resourceName: "26. Receipt"))
-                    controllers.append(controller)
-                } else {
-                    let loginController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "loginViewController")
-                    loginController.tabBarItem = UITabBarItem(title: "Мои заказы", image: #imageLiteral(resourceName: "26. Receipt"), selectedImage: #imageLiteral(resourceName: "26. Receipt"))
-                    controllers.append(loginController)
-                }
+            case .qrcode:
+                let controller = QRViewController()
+                controller.tabBarItem = UITabBarItem(title: "Сканер", image: #imageLiteral(resourceName: "26. Receipt"), selectedImage: #imageLiteral(resourceName: "26. Receipt"))
+                controllers.append(controller)
             case .profile:
                 if let token = UserDefaults.standard.string(forKey: "Token"), !token.isEmpty {
                     let controller = WebViewController(with: "https://1224.kz/my-account/", token: token)

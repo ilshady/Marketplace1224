@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,9 @@
 		AF695DFC25ECC58A00D3D053 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF695DFB25ECC58A00D3D053 /* UserModel.swift */; };
 		AF695E0025ECC68E00D3D053 /* ApiUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF695DFF25ECC68E00D3D053 /* ApiUrls.swift */; };
 		AF695E0425ECCEAA00D3D053 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF695E0325ECCEAA00D3D053 /* NetworkManager.swift */; };
+		B87CC76A263F075F00C10A7C /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87CC769263F075F00C10A7C /* QRViewController.swift */; };
+		B8949D69263F186600784BA6 /* TrackingPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8949D68263F186600784BA6 /* TrackingPopUpView.swift */; };
+		B8949D6B263F1DEF00784BA6 /* SqareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8949D6A263F1DEF00784BA6 /* SqareView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,9 @@
 		AF695DFB25ECC58A00D3D053 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		AF695DFF25ECC68E00D3D053 /* ApiUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiUrls.swift; sourceTree = "<group>"; };
 		AF695E0325ECCEAA00D3D053 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		B87CC769263F075F00C10A7C /* QRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
+		B8949D68263F186600784BA6 /* TrackingPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingPopUpView.swift; sourceTree = "<group>"; };
+		B8949D6A263F1DEF00784BA6 /* SqareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqareView.swift; sourceTree = "<group>"; };
 		DDB1462EF8533820D86C8E78 /* Pods_Marketplace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Marketplace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -68,7 +74,6 @@
 				941CC61FDE33B2317BDFBB5D /* Pods-Marketplace.debug.xcconfig */,
 				91570A9395C4B41A8B8FFCA8 /* Pods-Marketplace.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -96,8 +101,10 @@
 				AF695DFE25ECC67900D3D053 /* Helpers */,
 				AF03213925E57A680089B7AC /* AppDelegate.swift */,
 				AF03213B25E57A680089B7AC /* SceneDelegate.swift */,
+				B8949D65263F15E700784BA6 /* View */,
 				AF695DF325ECC4EA00D3D053 /* Model */,
 				AF03213D25E57A680089B7AC /* LoginViewController.swift */,
+				B87CC769263F075F00C10A7C /* QRViewController.swift */,
 				AF03213F25E57A680089B7AC /* Main.storyboard */,
 				AF03214225E57A6A0089B7AC /* Assets.xcassets */,
 				AF03214425E57A6A0089B7AC /* LaunchScreen.storyboard */,
@@ -124,6 +131,15 @@
 				AF695E0325ECCEAA00D3D053 /* NetworkManager.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B8949D65263F15E700784BA6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B8949D68263F186600784BA6 /* TrackingPopUpView.swift */,
+				B8949D6A263F1DEF00784BA6 /* SqareView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,11 +257,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF03213E25E57A680089B7AC /* LoginViewController.swift in Sources */,
+				B8949D6B263F1DEF00784BA6 /* SqareView.swift in Sources */,
+				B87CC76A263F075F00C10A7C /* QRViewController.swift in Sources */,
 				AF03213A25E57A680089B7AC /* AppDelegate.swift in Sources */,
 				AF695DF625ECC50500D3D053 /* ErrorModel.swift in Sources */,
 				AF290B9725EE2D24004A967D /* TabBarController.swift in Sources */,
 				AF695E0425ECCEAA00D3D053 /* NetworkManager.swift in Sources */,
 				AF695DFC25ECC58A00D3D053 /* UserModel.swift in Sources */,
+				B8949D69263F186600784BA6 /* TrackingPopUpView.swift in Sources */,
 				AF695E0025ECC68E00D3D053 /* ApiUrls.swift in Sources */,
 				AF03213C25E57A680089B7AC /* SceneDelegate.swift in Sources */,
 				AF290B9425EE2BCE004A967D /* WebViewController.swift in Sources */,
@@ -397,7 +416,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = E9P4AN999V;
+				DEVELOPMENT_TEAM = 9M5YLYU8BJ;
 				INFOPLIST_FILE = Marketplace/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -417,7 +436,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = E9P4AN999V;
+				DEVELOPMENT_TEAM = 9M5YLYU8BJ;
 				INFOPLIST_FILE = Marketplace/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
