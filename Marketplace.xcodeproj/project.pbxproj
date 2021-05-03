@@ -23,6 +23,7 @@
 		B87CC76A263F075F00C10A7C /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87CC769263F075F00C10A7C /* QRViewController.swift */; };
 		B8949D69263F186600784BA6 /* TrackingPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8949D68263F186600784BA6 /* TrackingPopUpView.swift */; };
 		B8949D6B263F1DEF00784BA6 /* SqareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8949D6A263F1DEF00784BA6 /* SqareView.swift */; };
+		B8949D6D263FD66000784BA6 /* TrackingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8949D6C263FD66000784BA6 /* TrackingModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		B87CC769263F075F00C10A7C /* QRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		B8949D68263F186600784BA6 /* TrackingPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingPopUpView.swift; sourceTree = "<group>"; };
 		B8949D6A263F1DEF00784BA6 /* SqareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqareView.swift; sourceTree = "<group>"; };
+		B8949D6C263FD66000784BA6 /* TrackingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingModel.swift; sourceTree = "<group>"; };
 		DDB1462EF8533820D86C8E78 /* Pods_Marketplace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Marketplace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -120,6 +122,7 @@
 			children = (
 				AF695DF525ECC50500D3D053 /* ErrorModel.swift */,
 				AF695DFB25ECC58A00D3D053 /* UserModel.swift */,
+				B8949D6C263FD66000784BA6 /* TrackingModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				AF695DFC25ECC58A00D3D053 /* UserModel.swift in Sources */,
 				B8949D69263F186600784BA6 /* TrackingPopUpView.swift in Sources */,
 				AF695E0025ECC68E00D3D053 /* ApiUrls.swift in Sources */,
+				B8949D6D263FD66000784BA6 /* TrackingModel.swift in Sources */,
 				AF03213C25E57A680089B7AC /* SceneDelegate.swift in Sources */,
 				AF290B9425EE2BCE004A967D /* WebViewController.swift in Sources */,
 			);

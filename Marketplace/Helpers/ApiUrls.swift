@@ -9,10 +9,11 @@ import Foundation
 
 struct APIUrls {
     static let baseUrl = "https://1224.kz/"
-    static let apiVersion = "v1/"
+    static let apiVersion = "v3/"
     static let loginModulePath = "jwt-auth/"
     static let jsonModule = "wp-json/"
     static let login = "token"
+    static let orders = "orders"
     
     static let generatedLoginUrl = baseUrl + jsonModule + loginModulePath + apiVersion + login
 }

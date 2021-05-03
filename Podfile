@@ -8,6 +8,5 @@ target 'Marketplace' do
   # Pods for Marketplace
   pod 'Alamofire'
   pod 'MKProgress'
-  pod 'SwiftQRScanner', :git => ‘https://github.com/vinodiOS/SwiftQRScanner’
 
 end

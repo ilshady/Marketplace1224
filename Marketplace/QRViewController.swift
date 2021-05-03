@@ -75,8 +75,8 @@ class QRViewController: UIViewController {
     }
     
     func createCornerFrame() {
-        let width: CGFloat = 400.0
-        let height: CGFloat = 400.0
+        let width: CGFloat = 300.0
+        let height: CGFloat = 300.0
         
         let rect = CGRect.init(
             origin: CGPoint.init(
@@ -109,15 +109,20 @@ class QRViewController: UIViewController {
     func setupPopUp() {
         view.addSubview(popUp)
         popUp.translatesAutoresizingMaskIntoConstraints = false
+        popUp.layer.cornerRadius = 2
+        popUp.layer.masksToBounds = true
         
         NSLayoutConstraint.activate([
             popUp.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             popUp.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            popUp.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 20),
-            popUp.heightAnchor.constraint(equalToConstant: 100)
+            popUp.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -10),
+            popUp.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5)
         ])
     }
     
+    func orderInfo() {
+        
+    }
     
 }
 
@@ -136,13 +141,14 @@ extension QRViewController: AVCaptureMetadataOutputObjectsDelegate {
 
         if metadataObj.type == AVMetadataObject.ObjectType.qr {
             // If the found metadata is equal to the QR code metadata then update the status label's text and set the bounds
-            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
-            //qrCodeFrameView?.frame = barCodeObject!.bounds
 
-            if metadataObj.stringValue != nil {
+            if let response = metadataObj.stringValue {
+                let responseArray = response.split(separator: ",")
+                let order = responseArray[0].split(separator: ":")
+                let orderNo = order[1]
+                print(orderNo)
                 view.bringSubviewToFront(popUp)
-               // messageLabel.text = metadataObj.stringValue
-            }
+            } 
         }
     }
 
