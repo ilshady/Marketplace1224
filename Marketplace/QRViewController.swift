@@ -7,20 +7,24 @@
 
 import UIKit
 import AVFoundation
+import MKProgress
+import Alamofire
 
 class QRViewController: UIViewController {
     
-    let popUp = TrackingPopUpView()
+    let popUpView = TrackingPopUpView()
     
     var captureSession = AVCaptureSession()
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var squareView: SquareView?
     
+    var invoiceNum: String?
+    
     //:TODO Fix text lable when wrong qr
 //    let bottomLabel: UILabel = {
 //        let label = UILabel()
 //        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "Неверный код!"
+//        label.text = "Вы приняли заказ!"
 //        label.backgroundColor = .red
 //        label.layer.cornerRadius = 14
 //        label.layer.masksToBounds = true
@@ -29,10 +33,13 @@ class QRViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .cyan
+        
+        popUpView.viewDelegate = self
+        
         setupPopUp()
         getBackCam()
         
+        self.hideKeyboardWhenTappedAround()
     }
     
     func getBackCam() {
@@ -44,10 +51,8 @@ class QRViewController: UIViewController {
         }
 
         do {
-            // Get an instance of the AVCaptureDeviceInput class using the previous device object.
             let input = try AVCaptureDeviceInput(device: captureDevice)
 
-            // Set the input device on the capture session.
             captureSession.addInput(input)
             
             let captureMetadataOutput = AVCaptureMetadataOutput()
@@ -56,7 +61,6 @@ class QRViewController: UIViewController {
             captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
             
-            // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
             videoPreviewLayer?.frame = view.layer.bounds
@@ -64,15 +68,53 @@ class QRViewController: UIViewController {
             
             captureSession.startRunning()
             
-            //Adding my View
             createCornerFrame()
             
         } catch {
-            // If any error occurs, simply print it out and don't continue any more.
             print(error)
             return
         }
     }
+    
+    func setupPopUp() {
+        view.addSubview(popUpView)
+        popUpView.translatesAutoresizingMaskIntoConstraints = false
+        popUpView.layer.cornerRadius = 2
+        popUpView.layer.masksToBounds = true
+        
+        NSLayoutConstraint.activate([
+            popUpView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            popUpView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            popUpView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20),
+            popUpView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5)
+        ])
+    }
+    
+    func getOrderInfo(orderNo: String) {
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Basic Y2tfMGQ5NGZjMmQ2ZmQxYWU4NjViNWY5ZjVlNTA3MThlNmVmMmZhMDM5MDpjc18yZmJkNmM3ZDU3Y2M3Yjg4Y2FlMDlkZmIzZWU5ZGYzZjlkMTE2YjM3="
+        ]
+        
+        MKProgress.show()
+        NetworkManager.shared.request(url: APIUrls.generatedOrderUrl + orderNo, method: .get, headers: headers) { (result: Result<TrackingModel, ErrorModel>) in
+            MKProgress.hide()
+            switch result {
+            case .failure(let error):
+                self.showAlert(alertText: "Ошибка", alertMessage: error.message)
+            case .success(let trackingModel):
+                let metaData = trackingModel.metaData
+                if let invoiceNumber = metaData.first(where: {$0.key == "wf_invoice_number"})?.value {
+                    self.invoiceNum = invoiceNumber
+                    self.view.bringSubviewToFront(self.popUpView)
+                }
+            }
+        }
+    }
+    
+}
+//MARK: RectangleViewSetup
+extension QRViewController {
     
     func createCornerFrame() {
         let width: CGFloat = 300.0
@@ -105,51 +147,41 @@ class QRViewController: UIViewController {
         view.layer.insertSublayer(maskLayer, above: videoPreviewLayer)
     
     }
-    
-    func setupPopUp() {
-        view.addSubview(popUp)
-        popUp.translatesAutoresizingMaskIntoConstraints = false
-        popUp.layer.cornerRadius = 2
-        popUp.layer.masksToBounds = true
-        
-        NSLayoutConstraint.activate([
-            popUp.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            popUp.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            popUp.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -10),
-            popUp.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5)
-        ])
-    }
-    
-    func orderInfo() {
-        
-    }
-    
 }
-
+//MARK: AVCaptureMetadataOutputObjectsDelegate
 extension QRViewController: AVCaptureMetadataOutputObjectsDelegate {
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        // Check if the metadataObjects array is not nil and it contains at least one object.
         if metadataObjects.count == 0 {
-            //qrCodeFrameView?.frame = CGRect.zero
-            //messageLabel.text = "No QR code is detected"
             return
         }
-
-        // Get the metadata object.
+        
         let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-
+        
         if metadataObj.type == AVMetadataObject.ObjectType.qr {
-            // If the found metadata is equal to the QR code metadata then update the status label's text and set the bounds
-
+            
             if let response = metadataObj.stringValue {
-                let responseArray = response.split(separator: ",")
-                let order = responseArray[0].split(separator: ":")
-                let orderNo = order[1]
-                print(orderNo)
-                view.bringSubviewToFront(popUp)
-            } 
+                if response.contains("Номер заказа") {
+                    self.captureSession.stopRunning()
+                    let responseArray = response.split(separator: ",")
+                    let order = responseArray[0].split(separator: ":")
+                    let orderNo = order[1].trimmingCharacters(in: .whitespaces)
+                    getOrderInfo(orderNo: String(orderNo))
+                }
+            }
         }
     }
 
+}
+//MARK: TrackingPopUpDelegate
+extension QRViewController: TrackingPopUpViewDelegate {
+    func checkButtonPressed() {
+        if popUpView.trackingInputTextField.text == invoiceNum {
+            self.showAlert(alertText: "Вы приняли заказ!", alertMessage: "Вы приняли заказ!")
+        } else {
+            self.showAlert(alertText: "Try again!", alertMessage: "Again try!")
+        }
+        view.sendSubviewToBack(popUpView)
+        captureSession.startRunning()
+    }
 }

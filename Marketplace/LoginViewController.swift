@@ -19,10 +19,25 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        hideKeyboardWhenTappedAround()
     }
     
     private func setupUI() {
         loginButton.layer.cornerRadius = 8
+        emailTextField.delegate = self
+    }
+    
+    private func performValidation() {
+        if !emailTextField.text!.isValidEmail() {
+            emailTextField.layer.borderColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+            emailTextField.layer.borderWidth = 1
+            emailTextField.layer.cornerRadius = 5
+            emailTextField.layer.masksToBounds = true
+        } else {
+            emailTextField.layer.borderWidth = 0
+            emailTextField.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        }
+        
     }
     
     @IBAction func loginAction(_ sender: Any) {
@@ -64,5 +79,29 @@ extension UIViewController {
         //Add more actions as you see fit
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
+extension String {
+    func isValidEmail() -> Bool {
+        let regex = try! NSRegularExpression(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}", options: .caseInsensitive)
+        return regex.firstMatch(in: self, options: [], range: NSRange(location: 0, length: count)) != nil
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        performValidation()
+    }
+    
+}

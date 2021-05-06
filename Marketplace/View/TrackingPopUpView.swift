@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol TrackingPopUpViewDelegate {
+    func checkButtonPressed()
+}
+
 class TrackingPopUpView: UIView {
     
+    var viewDelegate: TrackingPopUpViewDelegate?
+
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Введите выданный номер для трекинга заказа"
+        label.text = "Введите номер договора"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -25,6 +31,7 @@ class TrackingPopUpView: UIView {
         text.layer.cornerRadius = 2
         text.layer.borderWidth = 1
         text.layer.borderColor = #colorLiteral(red: 0.5176470588, green: 0.7607843137, blue: 0.08235294118, alpha: 1)
+        text.keyboardType = .numberPad
         text.textAlignment = .center
         text.layer.masksToBounds = true
         text.placeholder = "Номер заказа"
@@ -37,8 +44,8 @@ class TrackingPopUpView: UIView {
         button.backgroundColor = #colorLiteral(red: 0.5176470588, green: 0.7607843137, blue: 0.08235294118, alpha: 1)
         button.layer.cornerRadius = 2
         button.layer.masksToBounds = true
-        button.setTitle("Проверить".uppercased(), for: .normal)
-        //button.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+        button.setTitle("Принять заказ".uppercased(), for: .normal)
+        button.addTarget(self, action: #selector(handleCheckButton), for: .touchUpInside)
         return button
     }()
     
@@ -74,6 +81,13 @@ class TrackingPopUpView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension TrackingPopUpView {
+    
+    @objc func handleCheckButton() {
+        viewDelegate?.checkButtonPressed()
     }
 }
 

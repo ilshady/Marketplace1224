@@ -13,7 +13,9 @@ struct APIUrls {
     static let loginModulePath = "jwt-auth/"
     static let jsonModule = "wp-json/"
     static let login = "token"
-    static let orders = "orders"
+    static let orders = "orders/"
+    static let wc = "wc/"
     
     static let generatedLoginUrl = baseUrl + jsonModule + loginModulePath + apiVersion + login
+    static let generatedOrderUrl = baseUrl + jsonModule + wc + apiVersion + orders
 }

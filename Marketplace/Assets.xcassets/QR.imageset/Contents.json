@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "4. Home.png",
+      "filename" : "outline_qr_code_scanner_black_48pt_2x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "4. Home@2x.png",
+      "filename" : "outline_qr_code_scanner_black_48pt_2x-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "4. Home@3x.png",
+      "filename" : "outline_qr_code_scanner_black_48pt_2x-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

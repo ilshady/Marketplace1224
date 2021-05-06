@@ -7,8 +7,11 @@
 
 import UIKit
 
-struct TrackingModel: Decodable {
-    let orderNo: Int
-    let email: String
-    let phone: Int
+struct TrackingModel: Codable {
+    let metaData: [MetaData]
+}
+
+struct MetaData: Codable {
+    let key: String
+    let value: String
 }
