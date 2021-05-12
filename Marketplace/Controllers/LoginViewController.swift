@@ -7,7 +7,7 @@
 
 import UIKit
 import Alamofire
-import MKProgress
+import ProgressHUD
 
 class LoginViewController: UIViewController {
     
@@ -56,10 +56,9 @@ class LoginViewController: UIViewController {
             "username" : emailText,
             "password" : passwordText
         ]
-        
-        MKProgress.show()
+        ProgressHUD.show()
         NetworkManager.shared.request(url: APIUrls.generatedLoginUrl, method: .post, parameters: parameters) { (result: Result<UserResponseModel, ErrorModel>) in
-            MKProgress.hide()
+            ProgressHUD.dismiss()
             switch result {
             case .failure(let error):
                 self.showAlert(alertText: "Ошибка", alertMessage: error.message)
@@ -103,5 +102,4 @@ extension LoginViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         performValidation()
     }
-    
 }

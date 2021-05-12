@@ -7,6 +7,6 @@ target 'Marketplace' do
 
   # Pods for Marketplace
   pod 'Alamofire'
-  pod 'MKProgress'
+  pod 'ProgressHUD'
 
 end
