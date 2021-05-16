@@ -16,14 +16,8 @@ enum TabbarControllerType: CaseIterable {
 
 class TabBarController: UITabBarController {
     
-    let urls: [String] = [
-        "https://1224.kz",
-        "https://1224.kz"
-    ]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.viewControllers = getControllers()
     }
     

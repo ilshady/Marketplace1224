@@ -85,7 +85,6 @@ class TrackingPopUpView: UIView {
 }
 
 extension TrackingPopUpView {
-    
     @objc func handleCheckButton() {
         viewDelegate?.checkButtonPressed()
     }

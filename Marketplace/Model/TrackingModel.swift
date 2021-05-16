@@ -9,6 +9,7 @@ import UIKit
 
 struct TrackingModel: Codable {
     let metaData: [MetaData]
+    let status: String
 }
 
 struct MetaData: Codable {

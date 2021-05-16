@@ -13,7 +13,7 @@ open class SquareView: UIView {
         didSet { self.draw(self.bounds) }
     }
     
-    var lineWidth : CGFloat = 2 {
+    var lineWidth : CGFloat = 4 {
         didSet { self.draw(self.bounds) }
     }
     
