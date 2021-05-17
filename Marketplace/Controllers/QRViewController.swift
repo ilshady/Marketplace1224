@@ -13,11 +13,10 @@ import ProgressHUD
 class QRViewController: UIViewController {
     
     let popUpView = TrackingPopUpView()
-    let squareView = SquareView()
     
     var captureSession = AVCaptureSession()
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
-    //var squareView: SquareView?
+    var squareView: SquareView?
     
     private var invoiceNum: String?
     private var orderNo: String?
@@ -151,36 +150,23 @@ extension QRViewController {
     }
     
     func createCornerFrame() {
-//        let width: CGFloat = 280.0
-//        let height: CGFloat = 280.0
-//
-//        let rect = CGRect.init(
-//            origin: CGPoint.init(
-//                x: self.view.frame.midX - width/2,
-//                y: self.view.frame.midY - (width+80)/2),
-//            size: CGSize.init(width: width, height: height))
-//        self.squareView = SquareView(frame: rect)
-//        if let squareView = squareView {
-//            self.view.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
-//            squareView.autoresizingMask = UIView.AutoresizingMask(rawValue: UInt(0.0))
-//            self.view.addSubview(squareView)
-//
-//            addMaskLayerToVideoPreviewLayerAndAddText(rect: rect)
-//        }
+        let width: CGFloat = 280.0
+        let height: CGFloat = 280.0
+
+        let rect = CGRect.init(
+            origin: CGPoint.init(
+                x: self.view.frame.midX - width/2,
+                y: self.view.frame.midY - (width+80)/2),
+            size: CGSize.init(width: width, height: height))
+        self.squareView = SquareView(frame: rect)
+        if let squareView = squareView {
+            self.view.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
+            squareView.autoresizingMask = UIView.AutoresizingMask(rawValue: UInt(0.0))
+            self.view.addSubview(squareView)
+
+            addMaskLayerToVideoPreviewLayerAndAddText(rect: rect)
+        }
         
-        view.addSubview(squareView)
-        squareView.translatesAutoresizingMaskIntoConstraints = false
-        squareView.layer.cornerRadius = 2
-        squareView.layer.masksToBounds = true
-        
-        NSLayoutConstraint.activate([
-            squareView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            squareView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            squareView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20),
-            squareView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5)
-        ])
-        
-        addMaskLayerToVideoPreviewLayerAndAddText(rect: squareView.bounds)
     }
     
     func addMaskLayerToVideoPreviewLayerAndAddText(rect: CGRect) {
@@ -226,10 +212,10 @@ extension QRViewController: TrackingPopUpViewDelegate {
     func checkButtonPressed() {
         if popUpView.trackingInputTextField.text == invoiceNum {
             self.showAlert(alertText: "Вы приняли заказ!", alertMessage: "Вы приняли заказ!")
+            self.view.sendSubviewToBack(self.popUpView)
         } else {
-            self.showAlert(alertText: "Try again!", alertMessage: "Again try!")
+            self.showAlert(alertText: "Попробуйте еще раз!", alertMessage: "Некорректный номер договора!")
         }
-        self.view.sendSubviewToBack(self.popUpView)
         self.captureSession.startRunning()
     }
 }
