@@ -116,7 +116,7 @@ class QRViewController: UIViewController {
 extension QRViewController {
     
     func getBackCam() {
-        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera], mediaType: AVMediaType.video, position: .back)
+        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera,.builtInDualWideCamera,.builtInTripleCamera,.builtInTrueDepthCamera,.builtInWideAngleCamera,.builtInTelephotoCamera], mediaType: AVMediaType.video, position: .back)
         
         guard let captureDevice = deviceDiscoverySession.devices.first else {
             print("Failed to get the camera device")

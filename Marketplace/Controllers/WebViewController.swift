@@ -12,7 +12,6 @@ class WebViewController: UIViewController {
     
     lazy var webView: WKWebView = {
         let webView = WKWebView()
-        webView.navigationDelegate = self
         webView.allowsBackForwardNavigationGestures = true
         
         return webView
@@ -40,9 +39,5 @@ class WebViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-}
-
-extension WebViewController: WKNavigationDelegate {
     
 }

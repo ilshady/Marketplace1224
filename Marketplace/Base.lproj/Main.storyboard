@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HkO-Dz-S6o">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,75 +14,70 @@
             <objects>
                 <viewController storyboardIdentifier="loginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Marketplace" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CuL-JS-1F3">
-                                <rect key="frame" x="25" y="409" width="364" height="45"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tRN-zM-mla">
+                                <rect key="frame" x="20" y="85.5" width="280" height="397"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="market_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Re5-Nd-SaY">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="URc-am-rWG"/>
+                                        </constraints>
+                                    </imageView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wo3-Sf-7Q0">
+                                        <rect key="frame" x="0.0" y="160" width="280" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="4NL-xd-Vk4"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CuL-JS-1F3">
+                                        <rect key="frame" x="0.0" y="215" width="280" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="wHb-MM-RFy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lxn-pd-VCU">
+                                        <rect key="frame" x="0.0" y="270" width="280" height="30"/>
+                                        <state key="normal" title="Забыли пароль"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cI5-9d-Wiq">
+                                        <rect key="frame" x="0.0" y="310" width="280" height="50"/>
+                                        <color key="backgroundColor" red="0.57129228119999997" green="0.75294117647058822" blue="0.2469083369" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Q01-RD-1fx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <state key="normal" title="Вход">
+                                            <color key="titleColor" red="0.94902592900000005" green="0.94900828599999998" blue="0.9490202069" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Iym-sn-PCY"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qIB-hK-MEq">
+                                        <rect key="frame" x="0.0" y="370" width="280" height="27"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="Если вы еще не зарегистрировались. Регистрация"/>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="wHb-MM-RFy"/>
+                                    <constraint firstAttribute="bottom" secondItem="qIB-hK-MEq" secondAttribute="bottom" id="38X-OG-mcG"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wo3-Sf-7Q0">
-                                <rect key="frame" x="25" y="334" width="364" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="4NL-xd-Vk4"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
-                            </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="market_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Re5-Nd-SaY">
-                                <rect key="frame" x="25" y="144" width="364" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="URc-am-rWG"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cI5-9d-Wiq">
-                                <rect key="frame" x="25" y="554" width="364" height="50"/>
-                                <color key="backgroundColor" red="0.57129228119999997" green="0.75294117647058822" blue="0.2469083369" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Q01-RD-1fx"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <state key="normal" title="Вход">
-                                    <color key="titleColor" red="0.94902592900000005" green="0.94900828599999998" blue="0.9490202069" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <connections>
-                                    <action selector="loginAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Iym-sn-PCY"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lxn-pd-VCU">
-                                <rect key="frame" x="280" y="474" width="109" height="30"/>
-                                <state key="normal" title="Забыли пароль"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qIB-hK-MEq">
-                                <rect key="frame" x="25" y="797" width="365" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Если вы еще не зарегистрировались. Регистрация"/>
-                            </button>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qIB-hK-MEq" secondAttribute="bottom" constant="38" id="5Uc-0v-Pbi"/>
-                            <constraint firstItem="cI5-9d-Wiq" firstAttribute="top" secondItem="Lxn-pd-VCU" secondAttribute="bottom" constant="50" id="8ip-5R-BWZ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Wo3-Sf-7Q0" secondAttribute="trailing" constant="25" id="9h1-fD-BFG"/>
-                            <constraint firstItem="Wo3-Sf-7Q0" firstAttribute="top" secondItem="Re5-Nd-SaY" secondAttribute="bottom" constant="40" id="Bhp-WQ-UPw"/>
-                            <constraint firstItem="qIB-hK-MEq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="Gww-Sv-tHP"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Re5-Nd-SaY" secondAttribute="trailing" constant="25" id="L4C-XF-A2n"/>
-                            <constraint firstItem="CuL-JS-1F3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="NN4-gL-Fye"/>
-                            <constraint firstItem="Re5-Nd-SaY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="PMa-9i-3AP"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cI5-9d-Wiq" secondAttribute="trailing" constant="25" id="PXq-tN-aZW"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Lxn-pd-VCU" secondAttribute="trailing" constant="25" id="U3B-al-oMe"/>
-                            <constraint firstItem="cI5-9d-Wiq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="b5f-K8-w10"/>
-                            <constraint firstItem="CuL-JS-1F3" firstAttribute="top" secondItem="Wo3-Sf-7Q0" secondAttribute="bottom" constant="30" id="cgI-bv-KBC"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CuL-JS-1F3" secondAttribute="trailing" constant="25" id="kDj-rm-Kdi"/>
-                            <constraint firstItem="Wo3-Sf-7Q0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="lIA-ek-vK8"/>
-                            <constraint firstItem="Lxn-pd-VCU" firstAttribute="top" secondItem="CuL-JS-1F3" secondAttribute="bottom" constant="20" id="txj-W8-VzY"/>
-                            <constraint firstItem="Re5-Nd-SaY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="v8T-f8-Tdk"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qIB-hK-MEq" secondAttribute="trailing" constant="24" id="vQd-Ss-88K"/>
+                            <constraint firstItem="tRN-zM-mla" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="9yr-FR-biG"/>
+                            <constraint firstAttribute="trailing" secondItem="tRN-zM-mla" secondAttribute="trailing" constant="20" id="Rdc-dC-zza"/>
+                            <constraint firstItem="tRN-zM-mla" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Y25-36-bjJ"/>
+                            <constraint firstItem="tRN-zM-mla" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="jMX-WE-A1O"/>
                         </constraints>
                     </view>
                     <connections>

@@ -71,11 +71,9 @@ class LoginViewController: UIViewController {
 }
 
 extension UIViewController {
-    //Show a basic alert
     func showAlert(alertText : String, alertMessage : String) {
         let alert = UIAlertController(title: alertText, message: alertMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
-        //Add more actions as you see fit
         self.present(alert, animated: true, completion: nil)
     }
     
