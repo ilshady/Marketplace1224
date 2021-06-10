@@ -19,7 +19,7 @@ class NetworkManager {
             switch (response.result) {
             case .success:
                 guard let data = response.data else {
-                    completion(.failure(ErrorModel(code: "0", data: ErrorData(status: 0), message: "Невалидные данные")))
+                    completion(.failure(ErrorModel(code: "0", data: [ErrorData(status: 0)], message: "Невалидные данные")))
                     return
                 }
                 print(data.prettyPrintedJSONString ?? "JSON NOT FOUND")
@@ -46,7 +46,7 @@ class NetworkManager {
                 let errorModel = try decoder.decode(ErrorModel.self, from: data)
                 completion(.failure(errorModel))
             } catch {
-                completion(.failure(ErrorModel(code: "1", data: ErrorData(status: statusCode), message: error.localizedDescription)))
+                completion(.failure(ErrorModel(code: "1", data: [ErrorData(status: statusCode)], message: error.localizedDescription)))
             }
         }
     }

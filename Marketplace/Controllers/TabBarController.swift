@@ -17,11 +17,11 @@ enum TabbarControllerType: CaseIterable {
 class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         self.viewControllers = getControllers()
+        view.backgroundColor = .white
     }
     
-    private func getControllers() -> [UIViewController] {
+    public func getControllers() -> [UIViewController] {
         
         var controllers: [UIViewController] = []
         
@@ -41,7 +41,7 @@ class TabBarController: UITabBarController {
                     controller.tabBarItem = UITabBarItem(title: "Профиль", image: #imageLiteral(resourceName: "Person"), selectedImage: #imageLiteral(resourceName: "Person"))
                     controllers.append(controller)
                 } else {
-                    let loginController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "loginViewController")
+                    let loginController = LoginViewController()
                     loginController.tabBarItem = UITabBarItem(title: "Профиль", image: #imageLiteral(resourceName: "Person"), selectedImage: #imageLiteral(resourceName: "Person"))
                     controllers.append(loginController)
                 }
@@ -51,7 +51,7 @@ class TabBarController: UITabBarController {
                     controller.tabBarItem = UITabBarItem(title: "Корзина", image: #imageLiteral(resourceName: "Cart"), selectedImage: #imageLiteral(resourceName: "Cart"))
                     controllers.append(controller)
                 } else {
-                    let loginController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "loginViewController")
+                    let loginController = LoginViewController()
                     loginController.tabBarItem = UITabBarItem(title: "Корзина", image: #imageLiteral(resourceName: "Cart"), selectedImage: #imageLiteral(resourceName: "Cart"))
                     controllers.append(loginController)
                 }

@@ -1,61 +1,52 @@
 //
-//  LoginViewController.swift
+//  LoginVC.swift
 //  Marketplace
 //
-//  Created by Нуржан Орманали on 24.02.2021.
+//  Created by Ilshat Khairakhun on 09.06.2021.
 //
 
 import UIKit
-import Alamofire
 import ProgressHUD
 
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    lazy var loginView = LoginView()
+    
+    override func loadView() {
+        self.view = loginView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupUI()
+        loginView.viewDelegate = self
+        view.backgroundColor = .white
         hideKeyboardWhenTappedAround()
     }
     
-    private func setupUI() {
-        loginButton.layer.cornerRadius = 8
-        emailTextField.delegate = self
+    func loginDidPressed() {
+        loginAction()
     }
     
-    private func performValidation() {
-        if !emailTextField.text!.isValidEmail() {
-            emailTextField.layer.borderColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
-            emailTextField.layer.borderWidth = 1
-            emailTextField.layer.cornerRadius = 5
-            emailTextField.layer.masksToBounds = true
-        } else {
-            emailTextField.layer.borderWidth = 0
-            emailTextField.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        }
-        
+}
+
+extension LoginViewController: LoginViewDelegate {
+    
+    func forgotDidPressed() {
+        let forgotVC = WebViewController(with: "https://1224.kz/my-account/lost-password/")
+        present(forgotVC, animated: true, completion: nil)
     }
     
-    @IBAction func loginAction(_ sender: Any) {
-        
-        guard let emailText = emailTextField.text, !emailText.isEmpty else {
-            showAlert(alertText: "Ошибка", alertMessage: "Заполните e-mail адрес")
-            return
-        }
-        
-        guard let passwordText = passwordTextField.text, !passwordText.isEmpty else {
-            showAlert(alertText: "Ошибка", alertMessage: "Заполните пароль")
-            return
-        }
+    func registerDidPressed() {
+        let registerVC = WebViewController(with: "https://1224.kz/my-account/")
+        present(registerVC, animated: true, completion: nil)
+    }
+    
+    @objc func loginAction() {
         
         let parameters = [
-            "username" : emailText,
-            "password" : passwordText
-        ]
+                "username" : loginView.emailTextField.text,
+                "password" : loginView.passwordTextField.text
+            ]
         ProgressHUD.show()
         NetworkManager.shared.request(url: APIUrls.generatedLoginUrl, method: .post, parameters: parameters) { (result: Result<UserResponseModel, ErrorModel>) in
             ProgressHUD.dismiss()
@@ -64,10 +55,30 @@ class LoginViewController: UIViewController {
                 self.showAlert(alertText: "Ошибка", alertMessage: error.message)
             case .success(let userModel):
                 UserDefaults.standard.setValue(userModel.data?.token, forKey: "Token")
+                self.updateApp()
             }
         }
         
     }
+    
+    
+    func updateApp () {
+        let viewController = TabBarController()
+        
+        guard
+            let window = UIApplication.shared.keyWindow,
+            let rootViewController = window.rootViewController
+        else { return }
+        
+        viewController.view.frame = rootViewController.view.frame
+        viewController.view.layoutIfNeeded()
+        
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            window.rootViewController = viewController
+        })
+        
+    }
+    
 }
 
 extension UIViewController {
@@ -85,19 +96,5 @@ extension UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
-    }
-}
-
-extension String {
-    func isValidEmail() -> Bool {
-        let regex = try! NSRegularExpression(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}", options: .caseInsensitive)
-        return regex.firstMatch(in: self, options: [], range: NSRange(location: 0, length: count)) != nil
-    }
-}
-
-extension LoginViewController: UITextFieldDelegate {
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        performValidation()
     }
 }

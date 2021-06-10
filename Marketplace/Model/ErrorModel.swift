@@ -9,7 +9,7 @@ import Foundation
 
 struct ErrorModel: Error, Codable {
     let code: String
-    let data: ErrorData
+    let data: [ErrorData]
     let message: String
 }
 

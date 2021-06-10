@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+import ProgressHUD
 
 class WebViewController: UIViewController {
     
@@ -19,11 +20,16 @@ class WebViewController: UIViewController {
     
     override func loadView() {
         view = webView
+        ProgressHUD.show()
+
     }
     
     init(with url: String, token: String? = nil) {
         super.init(nibName: nil, bundle: nil)
+        ProgressHUD.animationType = .circleStrokeSpin
+        ProgressHUD.show()
         
+        webView.navigationDelegate = self
         if let url = URL(string: url) {
             var request = URLRequest(url: url)
             if let token = token {
@@ -38,6 +44,17 @@ class WebViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+extension WebViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        ProgressHUD.dismiss()
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        ProgressHUD.showError()
     }
     
 }
